@@ -16,8 +16,8 @@
 14
 15
 16
-17  LCD PIN
-18  BUZZER?             23  CLOCK (RX/TX)
+17  LCD PIN (R/W)
+18  BUZZER              23  CLOCK (RX/TX)
 19                      22  CLOCK (RX/TX)
-20  LCD PIN             21  BUTTON
+20  LCD PIN  RS           21  BUTTON
 

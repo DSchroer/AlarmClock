@@ -34,6 +34,7 @@
         {
             "label": "program",
             "type": "shell",
+            "dependsOn": "build",
             "presentation": {
                 "echo": true,
                 "reveal": "always",

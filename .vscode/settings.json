@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "lcd.h": "c",
+        "global.h": "c",
+        "io.h": "c",
+        "pgmspace.h": "c",
+        "iom328p.h": "c",
+        "iom32.h": "c",
+        "main.h": "c",
+        "button.h": "c"
+    },
+    "editor.formatOnSave": true
+}
