@@ -10,7 +10,8 @@
                 "/usr/avr/include/avr/iom32.h"
             ],
             "defines": [
-                "EDITOR"
+                "EDITOR",
+                "EEMEM"
             ],
             "intelliSenseMode": "clang-x64",
             "browse": {
