@@ -37,9 +37,10 @@ bool alrm_update(rtc_t *time) {
     uint8_t day = (1 << (time->day - 1));
 
     for (uint8_t i = 0; i < alarms_l; i++) {
-        if (time->hours == alarms[i].hour &&
-            time->minutes == alarms[i].minute &&
-            (alarms[i].day_flags & day) > 0) {
+        if (time->seconds == 0 &&
+            (alarms[i].day_flags & day) > 0 &&
+            time->hours == alarms[i].hour &&
+            time->minutes == alarms[i].minute) {
             return true;
         }
     }

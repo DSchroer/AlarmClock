@@ -1,45 +1,38 @@
 #include "main.h"
 
+#include <avr/interrupt.h>
 #include <avr/io.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "alarm.h"
 #include "button.h"
 #include "lib/lcd.h"
 #include "rtc.h"
 
+#define DISABLE_LIGHT() PORTD &= ~LIGHT
+
 rtc_t time;
 uint8_t last_second;
 
-void main_menu();
-void alarm_menu();
-void set_time();
-void display_time();
-void edit_alarm(alarm_t *alarm);
-
-uint8_t get_number(const char *display, uint8_t value, uint8_t min, uint8_t max);
-uint8_t get_select(const char *display, char **options, uint8_t value, uint8_t max, uint8_t flags);
-uint8_t get_alarm_days(uint8_t value);
-void print_alarm_days(uint8_t value);
-void trigger_alarm();
-
 int main() {
 
-    DDRD |= BUZZER;
-    PORTD = 0x00;
+    DDRD |= BUZZER | LIGHT;
+    PORTD = 0;
 
     load_alarms();
 
     lcd_init(LCD_DISP_ON);
     lcd_clrscr();
 
+    uint8_t light = 0;
     while (true) {
         btn_update(1);
+        update_light(&light);
 
         button_state state = btn_state_raw();
         if (state == button_down_long) {
+            enable_light(&light);
             main_menu();
             lcd_clrscr();
             btn_reset();
@@ -47,7 +40,10 @@ int main() {
 
         rtc_get_time(&time);
         if (alrm_update(&time)) {
+            enable_light(&light);
             trigger_alarm();
+            lcd_clrscr();
+            btn_reset();
         }
         display_time();
     }
@@ -55,21 +51,36 @@ int main() {
 
 void trigger_alarm() {
     lcd_clrscr();
-    lcd_puts("Good Morning\nZi Yue :)");
+
+    if (time.month == 2 && time.date == 19) {
+        lcd_puts("HAPPY BIRTHDAY!\nZi Yue :)");
+    } else {
+        lcd_puts("Good Morning\nZi Yue :)");
+    }
 
     PORTD |= BUZZER;
     uint8_t counter = 0;
+    uint8_t hits = 0;
+    uint16_t safety = 0;
     while (true) {
         btn_update(0);
 
-        button_state state = btn_state_raw();
-        if (state == button_down_long) {
-            break;
+        button_state state = btn_state();
+        if (state == button_down_short) {
+            if (++hits >= 10) {
+                break;
+            }
         }
 
         if (++counter > 50) {
             PORTD ^= BUZZER;
             counter = 0;
+            safety++;
+        }
+
+        // 17 minutes of alarm
+        if (safety > 2048) {
+            break;
         }
         sleep();
     }
@@ -278,5 +289,24 @@ uint8_t get_alarm_days(uint8_t value) {
 void print_alarm_days(uint8_t value) {
     for (uint8_t i = 0; i < 7; i++) {
         lcd_putc((value & (1 << i)) ? 0xFF : ' ');
+    }
+}
+
+void enable_light(uint8_t *light) {
+    PORTD |= LIGHT;
+    *light = 255;
+}
+
+void update_light(uint8_t *light) {
+    button_state state = btn_state_raw();
+    if (state == button_down_short) {
+        enable_light(light);
+    }
+
+    if (*light > 1) {
+        (*light)--;
+    } else if (*light == 1) {
+        DISABLE_LIGHT();
+        *light = 0;
     }
 }
