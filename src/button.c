@@ -3,7 +3,6 @@
 
 #include <avr/io.h>
 #include <stdbool.h>
-#include <stdint.h>
 
 #define LONG_PRESS 100
 #define SHORT_PRESS 4
@@ -13,7 +12,7 @@ button_state state;
 
 void btn_reset() {
     while (true) {
-        btn_update();
+        btn_update(0);
         if (!(PIND & BUTTON)) {
             break;
         }
@@ -21,10 +20,10 @@ void btn_reset() {
     }
 }
 
-void btn_update() {
+void btn_update(uint8_t multiplier) {
     state = button_up;
     if (PIND & BUTTON) {
-        ++counter;
+        counter += (1 << multiplier);
     } else if (counter) {
         if (counter >= LONG_PRESS) {
             state = button_down_long;

@@ -7,7 +7,8 @@
         "iom328p.h": "c",
         "iom32.h": "c",
         "main.h": "c",
-        "button.h": "c"
+        "button.h": "c",
+        "eeprom.h": "c"
     },
     "editor.formatOnSave": true
 }

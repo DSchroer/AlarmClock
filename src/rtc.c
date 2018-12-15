@@ -10,8 +10,8 @@
 char *months[] = {
     "Jan",
     "Feb",
-    "Mar"
-    "Apr"
+    "Mar",
+    "Apr",
     "May",
     "Jun",
     "Jul",
