@@ -1,0 +1,1 @@
+scons && avrdude -c usbtiny -p m328p -U build/main.hex

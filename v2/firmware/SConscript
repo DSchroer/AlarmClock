@@ -1,0 +1,14 @@
+env = Environment(
+    CC = 'avr-gcc',
+    CXX = 'avr-g++',
+    CCFLAGS = '-Wall -Os -DF_CPU=800000UL -mmcu=atmega328p',
+    CXXFLAGS = '-Wall -Os -DF_CPU=800000UL -mmcu=atmega328p -std=c++17',
+    LINKFLAGS = '-mmcu=atmega328p')
+
+source_files = Glob('src/*.cpp')
+source_files += Glob('src/lib/*.c')
+source_files += Glob('src/utils/*.cpp')
+
+env.Program('main.elf', source_files)
+env.Command('main.hex', 'main.elf', 'avr-objcopy -j .text -j .data -O ihex $SOURCE $TARGET')
+env.Command(None, 'main.hex', "avr-size $SOURCE")
