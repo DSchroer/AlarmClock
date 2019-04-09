@@ -1,5 +1,5 @@
 #pragma once
-#include "rtc.hpp"
+#include "../headers/rtc.hpp"
 
 void init_display();
 void draw_display(Time &time);

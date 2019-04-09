@@ -1,4 +1,5 @@
-#include "rtc.hpp"
+#ifndef LOCAL
+#include "interfaces/rtc.hpp"
 
 extern "C"
 {
@@ -62,3 +63,5 @@ void rtc_set_time(Time &time)
 
     i2c_writeReg(RTC_WRITE_ADDR, 0, (uint8_t *)&time, sizeof(Time));
 }
+
+#endif

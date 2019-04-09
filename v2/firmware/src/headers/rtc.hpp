@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+
+
 struct Time
 {
     uint8_t seconds;
@@ -38,5 +40,12 @@ static const char *days[]{
 
 const char *rtc_ordinal(uint8_t date);
 
-void rtc_get_time(Time &time);
-void rtc_set_time(Time &time);
+class Clock
+{
+private:
+public:
+    Clock();
+
+    void GetTime(Time& time);
+    void SetTime(Time& time);
+};

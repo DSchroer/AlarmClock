@@ -1,15 +1,15 @@
-#include "nokia.hpp"
-#include "buttons.hpp"
+#include "../headers/display.hpp"
+#include "../headers/buttons.hpp"
 
-void draw_line(unsigned int y)
+void draw_line(Display& display, uint8_t y)
 {
-    for (unsigned int x = 0; x < 84; x++)
+    for (uint8_t x = 0; x < 84; x++)
     {
-        nokia_lcd_set_pixel(x, y, 1);
+        display.Pixel(x, y);
     }
 }
 
-bool draw_options_menu(unsigned int &position, const char **options, unsigned int length)
+bool draw_options_menu(Display& display, uint8_t &position, const char **options, uint8_t length)
 {
     if (btn_pressed(0))
         position = position + 1;
@@ -28,17 +28,17 @@ bool draw_options_menu(unsigned int &position, const char **options, unsigned in
 
     position = position % length;
 
-    uint8_t y = nokia_lcd_y();
+    uint8_t y = display.y;
     for (uint8_t i = 0; i < length; i++)
     {
-        nokia_lcd_set_cursor(0, y + (10 * i));
+        display.SetCursor(0, y + (10 * i));
         if (position == i)
         {
-            nokia_lcd_write_char('-', 1);
+            display.Write('-', 1);
         }
 
-        nokia_lcd_set_cursor(8, nokia_lcd_y());
-        nokia_lcd_write_string(options[i], 1);
+        display.SetCursor(8, display.y);
+        display.Write(options[i], 1);
     }
 
     return btn_pressed(3);

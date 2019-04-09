@@ -1,10 +1,8 @@
 #include <stdio.h>
 
 #include "display.hpp"
-#include "buttons.hpp"
-#include "io.hpp"
-#include "light.hpp"
-#include "nokia.hpp"
+
+#include "../headers/light.hpp"
 #include "menus.hpp"
 
 enum class MenuState
@@ -22,15 +20,15 @@ MenuState menu_state{MenuState::DISPLAY_TIME};
 void init_display()
 {
     init_light();
-    nokia_lcd_init();
+    // nokia_lcd_init();
 }
 
 void button_transition(uint8_t button, MenuState state)
 {
-    if (btn_pressed(button))
-    {
-        menu_state = state;
-    }
+    // if (btn_pressed(button))
+    // {
+    //     menu_state = state;
+    // }
 }
 
 void draw_display(Time &time)
