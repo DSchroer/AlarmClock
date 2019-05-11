@@ -1,9 +1,6 @@
 #pragma once
 
-#include <stdbool.h>
 #include <stdint.h>
-
-
 
 struct Time
 {
@@ -39,13 +36,3 @@ static const char *days[]{
     "Saturday"};
 
 const char *rtc_ordinal(uint8_t date);
-
-class Clock
-{
-private:
-public:
-    Clock();
-
-    void GetTime(Time& time);
-    void SetTime(Time& time);
-};

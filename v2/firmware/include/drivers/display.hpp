@@ -1,4 +1,5 @@
 #pragma once
+#include "stdint.h"
 
 class Display
 {
@@ -6,7 +7,7 @@ public:
     Display();
     ~Display();
 
-    int x;
+    uint8_t x;
     int y;
 
     void SetCursor(int x, int y);

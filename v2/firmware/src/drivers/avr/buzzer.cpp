@@ -1,15 +1,13 @@
-#include "buzzer.hpp"
+#include "drivers/buzzer.hpp"
 #include <avr/io.h>
 
 #define BUZZER (1 << 4)
 
-void init_buzzer()
-{
+Buzzer::Buzzer(){
     DDRD |= BUZZER;
 }
 
-void set_buzzer(bool turnedOn)
-{
+void Buzzer::SetBuzzer(bool turnedOn){
     if (turnedOn)
         PORTD |= BUZZER;
     else
