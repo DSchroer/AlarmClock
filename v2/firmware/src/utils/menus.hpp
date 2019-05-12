@@ -1,6 +1,6 @@
-#pragma once
+// #pragma once
 
-#include "../headers/rtc.hpp"
+// #include <time.hpp>
 
-void draw_time();
-void draw_main_menu(Time &);
+// void draw_time();
+// void draw_main_menu(Time &);

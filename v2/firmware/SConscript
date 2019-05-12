@@ -12,21 +12,24 @@ if GetOption('local'):
     env = Environment(
             CC = 'gcc',
             CXX = 'g++',
-            CCFLAGS = '-Wall -Os',
-            CXXFLAGS = '-Wall -Os -std=c++17',
-            LOCAL = "LOCAL")
+            CXXFLAGS = '-Wall -Os -std=c++17 -I./include -lX11',
+            LOCAL = "LOCAL",
+            LIBS = "X11")
     source_files += Glob('src/drivers/local/*.cpp')
+
+    env.Program('../main', source_files)
 else:
     env = Environment(
         CC = 'avr-gcc',
         CXX = 'avr-g++',
-        CCFLAGS = '-Wall -Os -DF_CPU=800000UL -mmcu=atmega328p',
-        CXXFLAGS = '-Wall -Os -DF_CPU=800000UL -mmcu=atmega328p -std=c++17',
+        CCFLAGS = '-Wall -Os -DF_CPU=800000UL -mmcu=atmega328p -I./include -I./lib',
+        CXXFLAGS = '-Wall -Os -DF_CPU=800000UL -mmcu=atmega328p -std=c++17 -I./include -I./lib',
         LINKFLAGS = '-mmcu=atmega328p')
 
-    source_files += Glob('src/lib/*.c')
+    source_files += Glob('lib/*.c')
     source_files += Glob('src/drivers/avr/*.cpp')
 
-env.Program('main.elf', source_files)
-env.Command('main.hex', 'main.elf', 'avr-objcopy -j .text -j .data -O ihex $SOURCE $TARGET')
-env.Command(None, 'main.hex', "avr-size $SOURCE")
+    env.Program('main.elf', source_files)
+    env.Command('main.hex', 'main.elf', 'avr-objcopy -j .text -j .data -O ihex $SOURCE $TARGET')
+    env.Command(None, 'main.hex', "avr-size $SOURCE")
+

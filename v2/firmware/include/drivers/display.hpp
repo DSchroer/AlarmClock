@@ -1,9 +1,10 @@
 #pragma once
 #include "stdint.h"
 
-class Display
-{
-public:
+namespace Alarm {
+
+class Display {
+  public:
     Display();
     ~Display();
 
@@ -11,8 +12,11 @@ public:
     int y;
 
     void SetCursor(int x, int y);
-    void Write(const char * message, int scale);
-    void Write(char character, int scale);
+    void Write(const char *message, int scale = 1);
+    void Write(char character, int scale = 1);
     void Pixel(int x, int y);
+    void Flush();
     void Clear();
 };
+
+} // namespace Alarm

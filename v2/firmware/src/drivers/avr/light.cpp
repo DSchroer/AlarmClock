@@ -3,18 +3,16 @@
 
 #define LIGHT (1 << 5)
 
-Light::Light(){
+Light::Light() {
     DDRB |= LIGHT;
 }
 
-void Light::SetLight(bool turnedOn){
+void Light::SetLight(bool turnedOn) {
     if (turnedOn)
         PORTB |= LIGHT;
     else
         PORTB &= ~LIGHT;
 }
-
-
 
 // void update_light(Time &time)
 // {

@@ -1,14 +1,15 @@
 #define F_CPU 800000UL
 
-#include "headers/device.hpp"
+#include <drivers/display.hpp>
 
-int main()
-{
-    Device device;
+using namespace Alarm;
 
-    for (;;)
-    {
-        device.Tick();
+int main() {
+    Display display{};
+
+    display.Write("test", 1);
+    display.Flush();
+    for (;;) {
     }
 }
 

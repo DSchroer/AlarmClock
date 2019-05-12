@@ -1,11 +1,12 @@
 #pragma once
 
-class Clock
-{
-private:
-public:
+#include "../time.hpp"
+
+class Clock {
+  private:
+  public:
     Clock();
 
-    void GetTime(Time& time);
-    void SetTime(Time& time);
+    void GetTime(Time &time);
+    void SetTime(Time &time);
 };

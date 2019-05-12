@@ -1,12 +1,12 @@
-#include "drivers/buttons.hpp"
 #include "io.hpp"
+#include <drivers/buttons.hpp>
 
 #include <stdbool.h>
 
 uint8_t last_buttons;
 uint8_t buttons;
 
-Button::Button(uint8_t index): index{index} {
+Button::Button(uint8_t index) : index{index} {
     buttons = 0;
     last_buttons = 0;
 }
