@@ -1,8 +1,8 @@
 #include <X11/Xlib.h>
 #include <drivers/display.hpp>
 
+// only to keep the main code clean
 ::Display *d;
-
 int scale = 3;
 
 Alarm::Display::Display() {
