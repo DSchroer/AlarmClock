@@ -1,23 +1,11 @@
-#include <X11/Xlib.h>
 #include <drivers/display.hpp>
-
-// only to keep the main code clean
-::Display *d;
-int scale = 3;
+#include <sfml.h>
 
 Alarm::Display::Display() {
-    // Open a display.
-    d = XOpenDisplay(0);
-
-    if (d) {
-        // Create the window
-        Window w = XCreateWindow(d, DefaultRootWindow(d), 0, 0, 84 * scale,
-                                 48 * scale, 0, CopyFromParent, CopyFromParent,
-                                 CopyFromParent, 0, 0);
-
-        // Show the window
-        XMapWindow(d, w);
-    }
+    sf::RenderWindow window(
+        sf::VideoMode(84, 48), // size of the client area we want
+        "Display an Image"     // The text to appear on the window title
+    );
 }
 
 Alarm::Display::~Display() {
