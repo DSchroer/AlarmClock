@@ -1,4 +1,8 @@
+#ifndef LOCAL
 #include <avr/pgmspace.h>
+#else
+#define PROGMEM
+#endif
 
 const uint8_t CHARSET[][5] PROGMEM = {
 	{ 0x00, 0x00, 0x00, 0x00, 0x00 }, // 20 space

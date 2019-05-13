@@ -59,34 +59,9 @@ void nokia_lcd_power(uint8_t on);
  */
 void nokia_lcd_set_pixel(uint8_t x, uint8_t y, uint8_t value);
 
-/**
- * Draw single char with 1-6 scale
- * @code: char code
- * @scale: size of char
- */
-void nokia_lcd_write_char(char code, uint8_t scale);
-
-/**
- * Draw string. Example: writeString("abc",3);
- * @str: sending string
- * @scale: size of text
- */
-void nokia_lcd_write_string(const char *str, uint8_t scale);
-
-/**
- * Set cursor position
- * @x: horizontal position
- * @y: vertical position
- */
-void nokia_lcd_set_cursor(uint8_t x, uint8_t y);
-
 /*
  * Render screen to display
  */
 void nokia_lcd_render(void);
-
-uint8_t nokia_lcd_x();
-
-uint8_t nokia_lcd_y();
 
 #endif

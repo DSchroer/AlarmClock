@@ -16,20 +16,12 @@
 #include <avr/pgmspace.h>
 #include <avr/io.h>
 #include <util/delay.h>
-#include "nokia5110_chars.h"
 
 static struct
 {
 	/* screen byte massive */
 	uint8_t screen[504];
-
-	/* cursor position */
-	uint8_t cursor_x;
-	uint8_t cursor_y;
-
-} nokia_lcd = {
-	.cursor_x = 0,
-	.cursor_y = 0};
+} nokia_lcd = {};
 
 /**
  * Sending data to LCD
@@ -134,9 +126,6 @@ void nokia_lcd_clear(void)
 	/* Set column and row to 0 */
 	write_cmd(0x80);
 	write_cmd(0x40);
-	/*Cursor too */
-	nokia_lcd.cursor_x = 0;
-	nokia_lcd.cursor_y = 0;
 	/* Clear everything (504 bytes = 84cols * 48 rows / 8 bits) */
 	for (i = 0; i < 504; i++)
 		nokia_lcd.screen[i] = 0x00;
@@ -156,42 +145,6 @@ void nokia_lcd_set_pixel(uint8_t x, uint8_t y, uint8_t value)
 		*byte &= ~(1 << (7 - (y % 8)));
 }
 
-void nokia_lcd_write_char(char code, uint8_t scale)
-{
-	register uint8_t x, y;
-
-	for (x = 0; x < 5 * scale; x++)
-		for (y = 0; y < 7 * scale; y++)
-			if (pgm_read_byte(&CHARSET[code - 32][x / scale]) & (1 << y / scale))
-				nokia_lcd_set_pixel(nokia_lcd.cursor_x + x, nokia_lcd.cursor_y + y, 1);
-			else
-				nokia_lcd_set_pixel(nokia_lcd.cursor_x + x, nokia_lcd.cursor_y + y, 0);
-
-	nokia_lcd.cursor_x += 5 * scale + 1;
-	if (nokia_lcd.cursor_x >= 84)
-	{
-		nokia_lcd.cursor_x = 0;
-		nokia_lcd.cursor_y += 7 * scale + 1;
-	}
-	if (nokia_lcd.cursor_y >= 48)
-	{
-		nokia_lcd.cursor_x = 0;
-		nokia_lcd.cursor_y = 0;
-	}
-}
-
-void nokia_lcd_write_string(const char *str, uint8_t scale)
-{
-	while (*str)
-		nokia_lcd_write_char(*str++, scale);
-}
-
-void nokia_lcd_set_cursor(uint8_t x, uint8_t y)
-{
-	nokia_lcd.cursor_x = x;
-	nokia_lcd.cursor_y = y;
-}
-
 void nokia_lcd_render(void)
 {
 	register unsigned i;
@@ -202,14 +155,4 @@ void nokia_lcd_render(void)
 	/* Write screen to display */
 	for (i = 0; i < 504; i++)
 		write_data(nokia_lcd.screen[503 - i]);
-}
-
-uint8_t nokia_lcd_x()
-{
-	return nokia_lcd.cursor_x;
-}
-
-uint8_t nokia_lcd_y()
-{
-	return nokia_lcd.cursor_y;
 }

@@ -1,15 +1,26 @@
 #define F_CPU 800000UL
 
-#include <drivers/display.hpp>
+#include <display.hpp>
 
-using namespace Alarm;
+#include "utils/menu_manager.hpp"
+#include "menus/main_menu.hpp"
 
 int main() {
-    Display display{};
+    Display display;
+    MenuManager manager;
 
-    display.Write("test", 1);
-    display.Flush();
+    MainMenu main{manager};
+
+    manager.MoveTo(main);
+
     for (;;) {
+        display.Clear();
+
+        manager.Update();
+
+        manager.Render(display);
+
+        display.Flush();
     }
 }
 

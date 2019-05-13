@@ -7,14 +7,16 @@ AddOption('--local',
 source_files = Glob('src/*.cpp')
 
 source_files += Glob('src/utils/*.cpp')
+source_files += Glob('src/menus/*.cpp')
+source_files += Glob('src/drivers/shared/*.cpp')
 
 if GetOption('local'):
     env = Environment(
             CC = 'gcc',
             CXX = 'g++',
-            CXXFLAGS = '-Wall -Os -std=c++17 -I./include -lX11',
+            CXXFLAGS = '-Wall -Os -std=c++17 -g -DLOCAL -I./include -I/usr/local/SFML-2.0/include/ -lsfml-window',
             LOCAL = "LOCAL",
-            LIBS = "X11")
+            LIBS = ["sfml-window","sfml-graphics", "sfml-system"])
     source_files += Glob('src/drivers/local/*.cpp')
 
     env.Program('../main', source_files)
