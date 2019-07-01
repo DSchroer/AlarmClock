@@ -50,4 +50,5 @@ void Home::Render(Display& display){
 }
 
 void Home::OnButton(uint8_t button){
+    Manager.MoveTo(_main_menu);
 }
