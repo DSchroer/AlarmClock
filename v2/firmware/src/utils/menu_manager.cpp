@@ -10,7 +10,6 @@ void MenuManager::Update(){
     current->Update();
 }
 
-
 void MenuManager::Render(Display& display){
     current->Render(display);
 }

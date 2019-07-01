@@ -59,6 +59,5 @@ Clock::Clock(){
 }
 
 void Clock::Tick(){
-    rtc_reset_position();
     rtc_get_time(time);
 }

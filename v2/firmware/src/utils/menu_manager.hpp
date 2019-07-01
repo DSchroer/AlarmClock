@@ -17,7 +17,7 @@ public:
 
 class Menu
 {
-private:
+protected:
     MenuManager& Manager;
 
 public:
@@ -26,4 +26,5 @@ public:
     virtual void Reset() {};
     virtual void Update() {};
     virtual void Render(Display& display) = 0;
+    virtual void OnButton(uint8_t button) {};
 };

@@ -3,14 +3,14 @@
 #include <display.hpp>
 
 #include "utils/menu_manager.hpp"
-#include "menus/main_menu.hpp"
+#include "menus/home.hpp"
 
 int main() {
     Clock clock;
     Display display;
     MenuManager manager;
 
-    MainMenu main{manager, clock};
+    Home main{manager, clock};
 
     manager.MoveTo(main);
 
