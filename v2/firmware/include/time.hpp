@@ -11,28 +11,5 @@ struct Time
     uint8_t date;
     uint8_t month;
     uint8_t year;
+    uint8_t control;
 };
-
-static const char *months[]{"January",
-                            "February",
-                            "March",
-                            "April",
-                            "May",
-                            "June",
-                            "July",
-                            "August",
-                            "September",
-                            "October",
-                            "November",
-                            "December"};
-
-static const char *days[]{
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"};
-
-const char *rtc_ordinal(uint8_t date);

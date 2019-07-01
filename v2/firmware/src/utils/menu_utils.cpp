@@ -3,6 +3,34 @@
 
 #include <stdio.h>
 
+
+static const char *months[]{"January",
+                            "February",
+                            "March",
+                            "April",
+                            "May",
+                            "June",
+                            "July",
+                            "August",
+                            "September",
+                            "October",
+                            "November",
+                            "December"};
+
+static const char *days[]{
+    "Sunday ",
+    "Monday ",
+    "Tuesday ",
+    "Wednesday ",
+    "Thursday ",
+    "Friday ",
+    "Saturday "};
+
+uint8_t clamp(uint8_t d, uint8_t min, uint8_t max) {
+  const uint8_t t = d < min ? min : d;
+  return t > max ? max : t;
+}
+
 void DrawTime(Display& display, const Time& time) {
     //Top alarm
     display.SetCursor(10,2);
@@ -16,6 +44,15 @@ void DrawTime(Display& display, const Time& time) {
 
     //Day Display
     display.SetCursor(1,20);
-    display.Write("DAY MON YEAR", 1);
+    display.Write(days[clamp(time.day, 1, 8) - 1], 1);
 
+    char dateBuffer[9];
+    snprintf(dateBuffer, sizeof(dateBuffer), "%02d 20%02d", time.date, time.year);
+
+    display.SetCursor(1,30);
+    display.WriteL(dateBuffer, 3, 1);
+    display.Write(months[clamp(time.month, 1, 12)  - 1], 1);
+
+    display.SetCursor(1,40);
+    display.WriteL(&dateBuffer[3], 4, 1);
 }

@@ -1,4 +1,4 @@
-#include "./main_menu.hpp";
+#include "./main_menu.hpp"
 
 void MainMenu::Render(Display& display){
     display.SetCursor(20,2);
@@ -20,6 +20,7 @@ void MainMenu::OnButton(uint8_t button){
     switch (button)
     {
     case 0:
+        Manager.MoveTo(*setTime);
         break;
     case 1:
         break;

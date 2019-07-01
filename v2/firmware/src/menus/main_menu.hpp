@@ -7,6 +7,7 @@ private:
     
 public:
     Menu* home;
+    Menu* setTime;
 
     MainMenu(MenuManager& manager): Menu(manager) {};
 

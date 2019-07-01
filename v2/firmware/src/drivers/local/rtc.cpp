@@ -19,4 +19,14 @@ void Clock::Tick(){
 
     time.month = fullTime->tm_mon;
     time.year = fullTime->tm_year;
+
+    time.date = 0;
+    time.day = 0;
+
+    time.month = 0;
+    time.year = 0;
+}
+
+void Clock::SetTime(Time& time){
+
 }

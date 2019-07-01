@@ -18,11 +18,14 @@ int main() {
 
     //Menus
     MainMenu rootMenu {manager};
+
     Home main {manager, clock, rootMenu};
-    SetTime setTime {manager, clock};
+    SetTime setTime {manager, clock, rootMenu};
+
+    rootMenu.home = &main;
+    rootMenu.setTime = &setTime;
 
     manager.MoveTo(main);
-    manager.MoveTo(setTime);
 
     for (;;) {
         display.Clear();

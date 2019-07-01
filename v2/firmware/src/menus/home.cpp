@@ -34,8 +34,8 @@ void Home::Render(Display& display){
 
     DrawTime(display, time);
     
-    display.SetCursor(1,40);
-    Spiner(display);
+    // display.SetCursor(1,40);
+    // Spiner(display);
     // display.Write("Alarm:", 1);
 }
 

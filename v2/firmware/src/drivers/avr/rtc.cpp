@@ -51,6 +51,11 @@ void rtc_set_time(Time &time) {
         ((uint8_t *)&time)[i] = bin_bcd(((uint8_t *)&time)[i]);
     }
 
+    // Turn off the CH bit
+    time.seconds = ~(0 << 7) & time.seconds;
+    // Enable debug square wave
+    time.control = 0b00010000;
+
     i2c_writeReg(RTC_WRITE_ADDR, 0, (uint8_t *)&time, sizeof(Time));
 }
 
@@ -60,4 +65,8 @@ Clock::Clock(){
 
 void Clock::Tick(){
     rtc_get_time(time);
+}
+
+void Clock::SetTime(Time& time){
+    rtc_set_time(time);
 }
