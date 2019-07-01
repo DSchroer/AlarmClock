@@ -1,5 +1,6 @@
 #pragma once
 #include <display.hpp>
+#include <drivers/buttons.hpp>
 
 class Menu;
 
@@ -7,8 +8,9 @@ class MenuManager
 {
 private:
     Menu* current;
+    Button& buttons;
 public:
-    MenuManager() {};
+    MenuManager(Button& buttons): buttons{buttons} {};
 
     void MoveTo(Menu& menu);
     void Update();

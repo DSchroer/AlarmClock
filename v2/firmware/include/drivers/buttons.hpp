@@ -6,11 +6,9 @@
 
 class Button
 {
-private:
-    uint8_t index;
 public:
-    Button(uint8_t index);
+    Button();
 
     void Tick();
-    bool Pressed();
+    bool Pressed(uint8_t index);
 };

@@ -6,7 +6,7 @@
 uint8_t last_buttons;
 uint8_t buttons;
 
-Button::Button(uint8_t index) : index{index} {
+Button::Button() {
     buttons = 0;
     last_buttons = 0;
 }
@@ -16,6 +16,6 @@ void Button::Tick() {
     buttons = PIND;
 }
 
-bool Button::Pressed() {
+bool Button::Pressed(uint8_t index) {
     return (buttons & (1 << index)) && !(last_buttons & (1 << index)) ? true : false;
 }

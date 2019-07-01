@@ -7,6 +7,12 @@ void MenuManager::MoveTo(Menu& menu){
 }
 
 void MenuManager::Update(){
+    for(uint8_t btnIndex = 0; btnIndex < 4; btnIndex++){
+        if(buttons.Pressed(btnIndex)){
+            current->OnButton(btnIndex);
+        }
+    }
+
     current->Update();
 }
 
