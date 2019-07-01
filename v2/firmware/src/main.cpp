@@ -7,6 +7,7 @@
 
 #include "menus/home.hpp"
 #include "menus/main_menu.hpp"
+#include "menus/set_time.hpp"
 
 int main() {
     Clock clock;
@@ -18,8 +19,10 @@ int main() {
     //Menus
     MainMenu rootMenu {manager};
     Home main {manager, clock, rootMenu};
+    SetTime setTime {manager, clock};
 
-    manager.MoveTo(rootMenu);
+    manager.MoveTo(main);
+    manager.MoveTo(setTime);
 
     for (;;) {
         display.Clear();

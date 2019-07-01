@@ -48,8 +48,12 @@ void Display::Write(char code, uint8_t scale) {
 }
 
 void Display::Line(uint8_t y){
-	for (int x = 0; x < 84; x++)
+	Line(0, y, 84);
+}
+
+void Display::Line(uint8_t x, uint8_t y, uint8_t length){
+	for (int xPos = x; xPos < x + length; xPos++)
 	{
-		Pixel(x, y, 1);
+		Pixel(xPos, y, 1);
 	}
 }

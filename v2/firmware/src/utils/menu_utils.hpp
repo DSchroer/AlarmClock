@@ -1,4 +1,5 @@
-// #pragma once
+#pragma once
+#include <drivers/rtc.hpp>
+#include <display.hpp>
 
-// void draw_line(unsigned int y);
-// bool draw_options_menu(unsigned int &position, const char **options, unsigned int length);
+void DrawTime(Display& display, const Time& time);

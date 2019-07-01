@@ -24,6 +24,7 @@ void MainMenu::OnButton(uint8_t button){
     case 1:
         break;
     case 2:
+        Manager.MoveTo(*home);
         break;
     }
 }

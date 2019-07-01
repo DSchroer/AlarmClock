@@ -17,5 +17,6 @@ void MenuManager::Update(){
 }
 
 void MenuManager::Render(Display& display){
+    display.SetCursor(0,0);
     current->Render(display);
 }
