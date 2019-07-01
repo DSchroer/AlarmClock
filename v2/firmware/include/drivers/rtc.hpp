@@ -6,7 +6,8 @@ class Clock {
   private:
   public:
     Clock();
+    Time time;
 
-    void GetTime(Time &time);
+    void Tick();
     void SetTime(Time &time);
 };

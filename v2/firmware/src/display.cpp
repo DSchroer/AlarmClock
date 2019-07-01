@@ -10,6 +10,11 @@ void Display::SetCursor(uint8_t x, uint8_t y) {
 	Y = y;
 }
 
+void Display::WriteL(const char *message, uint8_t length, uint8_t scale) {
+    while (*message && length--)
+		Write(*message++, scale);
+}
+
 void Display::Write(const char *message, uint8_t scale) {
     while (*message)
 		Write(*message++, scale);

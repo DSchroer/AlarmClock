@@ -6,16 +6,18 @@
 #include "menus/main_menu.hpp"
 
 int main() {
+    Clock clock;
     Display display;
     MenuManager manager;
 
-    MainMenu main{manager};
+    MainMenu main{manager, clock};
 
     manager.MoveTo(main);
 
     for (;;) {
         display.Clear();
 
+        clock.Tick();
         manager.Update();
 
         manager.Render(display);
