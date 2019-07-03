@@ -7,6 +7,7 @@ AddOption('--local',
 source_files = Glob('src/*.cpp')
 
 source_files += Glob('src/utils/*.cpp')
+source_files += Glob('src/utils/alarms/*.cpp')
 source_files += Glob('src/menus/*.cpp')
 source_files += Glob('src/drivers/shared/*.cpp')
 

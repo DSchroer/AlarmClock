@@ -9,6 +9,8 @@
 #include "menus/main_menu.hpp"
 #include "menus/set_time.hpp"
 
+#include "utils/alarms/alarm_registry.hpp"
+
 int main() {
     Clock clock;
     Display display;
