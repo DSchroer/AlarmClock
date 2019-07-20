@@ -1,6 +1,7 @@
 #pragma once
 
 #include "./alarm_registry.hpp"
+#include "../heap.hpp"
 
 #include <drivers/rtc.hpp>
 
@@ -11,17 +12,23 @@ struct Trigger
     Alarm& alarm;
 };
 
+bool operator >(const Trigger& lhs, const Trigger& rhs) {
+    return lhs.next > rhs.next;
+}
+
+bool operator <(const Trigger& lhs, const Trigger& rhs) {
+    return lhs.next < rhs.next;
+}
+
+bool operator ==(const Trigger& lhs, const Trigger& rhs) {
+    return lhs.next == rhs.next;
+}
+
 class AlarmTrigger{
 private:
     AlarmRegistry& registry;
-    Trigger* triggers;
+    Heap<Trigger> triggers;
 
-    uint8_t Parent(const uint8_t index);
-    uint8_t LChild(const uint8_t index);
-    uint8_t RChild(const uint8_t index);
-
-    void BubbleUp();
-    void BubbleDown();
 public:
     AlarmTrigger(AlarmRegistry& registry);
     ~AlarmTrigger();

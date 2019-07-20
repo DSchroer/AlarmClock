@@ -13,3 +13,7 @@ struct Time
     uint8_t year;
     uint8_t control;
 };
+
+bool operator >(const Time& lhs, const Time& rhs);
+bool operator <(const Time& lhs, const Time& rhs);
+bool operator ==(const Time& lhs, const Time& rhs);
