@@ -15,7 +15,7 @@ if GetOption('local'):
     env = Environment(
             CC = 'gcc',
             CXX = 'g++',
-            CXXFLAGS = '-Wall -Os -std=c++17 -g -DLOCAL -I./include -I/usr/local/SFML-2.0/include/ -lsfml-window',
+            CXXFLAGS = '-Wall -std=c++17 -g -DLOCAL -I./include -I/usr/local/SFML-2.0/include/ -lsfml-window',
             LOCAL = "LOCAL",
             LIBS = ["sfml-window","sfml-graphics", "sfml-system"])
     source_files += Glob('src/drivers/local/*.cpp')
