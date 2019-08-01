@@ -1,4 +1,4 @@
-#include <display.hpp>
+#include "display.hpp"
 #include "utils/chars.hpp"
 
 #ifdef LOCAL 
@@ -27,8 +27,7 @@ void Display::Write(char code, uint8_t scale) {
         {
             if (pgm_read_byte(&CHARSET[code - 32][x / scale]) & (1 << y / scale)){
                 Pixel(X + x, Y + y, 1);
-            }
-			else {
+            } else {
                 Pixel(X + x, Y + y, 0);
             }	
         }	

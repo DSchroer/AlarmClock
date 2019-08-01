@@ -2,38 +2,26 @@
 
 #include "./alarm_registry.hpp"
 #include "../heap.hpp"
+#include "../vector.hpp"
 
 #include <drivers/rtc.hpp>
 
-struct Trigger
-{
-    Time next;
-    bool isSnooze;
-    Alarm& alarm;
+struct AlarmEntry {
+    Alarm alarm;
+    bool isSnoozed = false;
+
+    AlarmEntry(Alarm value) { this->alarm = value; }
 };
 
-bool operator >(const Trigger& lhs, const Trigger& rhs) {
-    return lhs.next > rhs.next;
-}
-
-bool operator <(const Trigger& lhs, const Trigger& rhs) {
-    return lhs.next < rhs.next;
-}
-
-bool operator ==(const Trigger& lhs, const Trigger& rhs) {
-    return lhs.next == rhs.next;
-}
-
-class AlarmTrigger{
+class AlarmManager{
 private:
-    AlarmRegistry& registry;
-    Heap<Trigger> triggers;
-
+    Vector<Alarm>& registry;
+    Vector<AlarmEntry> alarms{};
+    AlarmEntry* activeAlarm = nullptr;
 public:
-    AlarmTrigger(AlarmRegistry& registry);
-    ~AlarmTrigger();
 
     bool Test(Time& time);
     void Snooze();
+    void Stop();
     void Rebuild();
 };

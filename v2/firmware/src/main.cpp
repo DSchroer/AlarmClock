@@ -1,7 +1,8 @@
 #define F_CPU 800000UL
 
-#include <display.hpp>
+#include "../drivers/include/display.hpp"
 #include <drivers/buttons.hpp>
+#include <cstdio>
 
 #include "utils/menu_manager.hpp"
 
@@ -11,34 +12,46 @@
 
 #include "utils/alarms/alarm_registry.hpp"
 
+#include "utils/vector.hpp"
+
 int main() {
-    Clock clock;
-    Display display;
-    Button button;
 
-    MenuManager manager {button};
+    Vector<uint8_t > data;
+    data.Add(5);
+    data.Add(10);
+    data.Add(1);
 
-    //Menus
-    MainMenu rootMenu {manager};
-
-    Home main {manager, clock, rootMenu};
-    SetTime setTime {manager, clock, rootMenu};
-
-    rootMenu.home = &main;
-    rootMenu.setTime = &setTime;
-
-    manager.MoveTo(main);
-
-    for (;;) {
-        display.Clear();
-
-        clock.Tick();
-        button.Tick();
-
-        manager.Update();
-
-        manager.Render(display);
-
-        display.Flush();
+    for(int i = 0; i < data.Count; i++){
+        printf("%d\n", data[i]);
     }
+
+//    Clock clock;
+//    Display display;
+//    Button button;
+//
+//    MenuManager manager {button};
+//
+//    //Menus
+//    MainMenu rootMenu {manager};
+//
+//    Home main {manager, clock, rootMenu};
+//    SetTime setTime {manager, clock, rootMenu};
+//
+//    rootMenu.home = &main;
+//    rootMenu.setTime = &setTime;
+//
+//    manager.MoveTo(main);
+//
+//    for (;;) {
+//        display.Clear();
+//
+//        clock.Tick();
+//        button.Tick();
+//
+//        manager.Update();
+//
+//        manager.Render(display);
+//
+//        display.Flush();
+//    }
 }
