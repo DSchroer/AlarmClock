@@ -1,16 +1,16 @@
 #pragma once
 
 #include "./alarm_registry.hpp"
-#include "../heap.hpp"
-#include "../vector.hpp"
+#include "../utils/heap.hpp"
+#include "../utils/vector.hpp"
 
 #include <drivers/rtc.hpp>
 
 struct AlarmEntry {
-    Alarm alarm;
+    Alarm alarm{};
     bool isSnoozed = false;
 
-    AlarmEntry(Alarm value) { this->alarm = value; }
+    explicit AlarmEntry(Alarm value) { this->alarm = value; }
 };
 
 class AlarmManager{
@@ -19,6 +19,7 @@ private:
     Vector<AlarmEntry> alarms{};
     AlarmEntry* activeAlarm = nullptr;
 public:
+    explicit AlarmManager(Vector<Alarm>& registry): registry{registry} { Rebuild(); };
 
     bool Test(Time& time);
     void Snooze();

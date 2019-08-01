@@ -10,7 +10,7 @@
 #include "menus/main_menu.hpp"
 #include "menus/set_time.hpp"
 
-#include "utils/alarms/alarm_registry.hpp"
+#include "alarms/alarm_manager.hpp"
 
 #include "utils/vector.hpp"
 

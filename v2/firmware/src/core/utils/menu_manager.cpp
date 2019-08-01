@@ -1,5 +1,5 @@
 #include "menu_manager.hpp"
-#include "../../drivers/include/display.hpp"
+#include "display.hpp"
 
 void MenuManager::MoveTo(Menu& menu){
     menu.Reset();

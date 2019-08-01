@@ -1,5 +1,5 @@
 #pragma once
-#include "../../drivers/include/display.hpp"
+#include "display.hpp"
 #include <drivers/buttons.hpp>
 
 class Menu;

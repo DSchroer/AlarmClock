@@ -1,4 +1,4 @@
-#include "./alarm_trigger.hpp"
+#include "alarm_manager.hpp"
 
 bool AlarmManager::Test(Time &time) {
     if(activeAlarm != nullptr){

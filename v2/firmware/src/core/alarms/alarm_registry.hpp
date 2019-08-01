@@ -1,7 +1,7 @@
 #pragma once
 
 #include "./alarm.hpp"
-#include "../vector.hpp"
+#include "../utils/vector.hpp"
 
 class AlarmRegistry: Vector<Alarm>
 {
