@@ -20,6 +20,9 @@ void AlarmManager::Snooze() {
     if(activeAlarm == nullptr){
         return;
     }
+
+    alarms.Add(AlarmEntry(activeAlarm->alarm + 10, true));
+    activeAlarm = nullptr;
 }
 
 void AlarmManager::Rebuild() {
@@ -36,7 +39,6 @@ void AlarmManager::Rebuild() {
 
 void AlarmManager::Stop() {
     if(activeAlarm->isSnoozed){
-
     }
     activeAlarm = nullptr;
 }

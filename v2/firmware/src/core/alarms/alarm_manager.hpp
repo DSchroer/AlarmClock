@@ -10,7 +10,7 @@ struct AlarmEntry {
     Alarm alarm{};
     bool isSnoozed = false;
 
-    explicit AlarmEntry(Alarm value) { this->alarm = value; }
+    explicit AlarmEntry(Alarm value, bool snooze = false): alarm{value}, isSnoozed{snooze} { }
 };
 
 class AlarmManager{
