@@ -38,7 +38,18 @@ void AlarmManager::Rebuild() {
 }
 
 void AlarmManager::Stop() {
-    if(activeAlarm->isSnoozed){
+    if(activeAlarm == nullptr){
+        return;
     }
+
+    if(activeAlarm->isSnoozed){
+        auto index = alarms.IndexOf(activeAlarm);
+        if(index != -1){
+            alarms.Remove(index);
+        }else{
+            Rebuild();
+        }
+    }
+
     activeAlarm = nullptr;
 }

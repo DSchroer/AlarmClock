@@ -3,7 +3,7 @@
 #include "./alarm.hpp"
 #include "../utils/vector.hpp"
 
-class AlarmRegistry: Vector<Alarm>
+class AlarmRegistry: public Vector<Alarm>
 {
 private:
 public:

@@ -7,6 +7,7 @@
 #include "utils/menu_manager.hpp"
 
 #include "menus/home.hpp"
+#include "menus/alarm_menu.hpp"
 #include "menus/main_menu.hpp"
 #include "menus/set_time.hpp"
 
@@ -15,43 +16,44 @@
 #include "utils/vector.hpp"
 
 int main() {
+    Clock clock;
+    Display display;
+    Button button;
 
-    Vector<uint8_t > data;
-    data.Add(5);
-    data.Add(10);
-    data.Add(1);
+    MenuManager manager {button};
 
-    for(int i = 0; i < data.Count; i++){
-        printf("%d\n", data[i]);
+    //Menus
+    MainMenu rootMenu {manager};
+
+    Home main {manager, clock, rootMenu};
+    SetTime setTime {manager, clock, rootMenu};
+
+    AlarmRegistry registry{};
+    registry.Add(Alarm{17, 19, AlarmDay ::All});
+
+    AlarmManager alarmManager{registry};
+
+    AlarmMenu alarmMenu{manager, alarmManager};
+
+    rootMenu.home = &main;
+    rootMenu.setTime = &setTime;
+
+    manager.MoveTo(main);
+
+    for (;;) {
+        display.Clear();
+
+        clock.Tick();
+        button.Tick();
+
+        if(alarmManager.Test(clock.time)){
+            manager.MoveTo(alarmMenu);
+        }
+
+        manager.Update();
+
+        manager.Render(display);
+
+        display.Flush();
     }
-
-//    Clock clock;
-//    Display display;
-//    Button button;
-//
-//    MenuManager manager {button};
-//
-//    //Menus
-//    MainMenu rootMenu {manager};
-//
-//    Home main {manager, clock, rootMenu};
-//    SetTime setTime {manager, clock, rootMenu};
-//
-//    rootMenu.home = &main;
-//    rootMenu.setTime = &setTime;
-//
-//    manager.MoveTo(main);
-//
-//    for (;;) {
-//        display.Clear();
-//
-//        clock.Tick();
-//        button.Tick();
-//
-//        manager.Update();
-//
-//        manager.Render(display);
-//
-//        display.Flush();
-//    }
 }
