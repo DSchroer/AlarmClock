@@ -78,8 +78,10 @@ void AlarmList::OnButton(uint8_t button) {
             }
         } else if (button == 3) {
             if (position == 0) {
+                Alarm alarm{};
+                editMenu.alarm = alarm;
                 // TODO: Go to alarm create menu
-//                Manager.MoveTo();
+                Manager.MoveTo(alarm);Q
             } else {
                 menuState = MenuState::Alarm;
             }

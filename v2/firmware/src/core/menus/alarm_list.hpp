@@ -2,6 +2,7 @@
 
 #include <alarms/alarm_registry.hpp>
 #include "../utils/menu_manager.hpp"
+#include "alarm_edit.hpp"
 
 enum class MenuState{
     List,
@@ -22,9 +23,10 @@ private:
 
     AlarmRegistry& registry;
     Menu& mainMenu;
+    AlarmEdit& editMenu;
 
 public:
-    explicit AlarmList(MenuManager& manager, AlarmRegistry& registry1, Menu& main): Menu{manager}, registry{registry1}, mainMenu{main} {};
+    explicit AlarmList(MenuManager& manager, AlarmRegistry& registry1, Menu& main, AlarmEdit& edit): Menu{manager}, registry{registry1}, mainMenu{main}, editMenu{edit} {};
 
     void Render(Display& display) override;
     void OnButton(uint8_t button) override;
