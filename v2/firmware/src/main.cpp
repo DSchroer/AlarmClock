@@ -7,6 +7,7 @@
 #include "utils/menu_manager.hpp"
 
 #include "menus/home.hpp"
+#include "menus/alarm_list.hpp"
 #include "menus/alarm_menu.hpp"
 #include "menus/main_menu.hpp"
 #include "menus/set_time.hpp"
@@ -34,11 +35,15 @@ int main() {
     AlarmManager alarmManager{registry};
 
     AlarmMenu alarmMenu{manager, alarmManager};
+    AlarmList alarmList{manager, registry, rootMenu};
+
 
     rootMenu.home = &main;
     rootMenu.setTime = &setTime;
+    rootMenu.alarmList = &alarmList;
 
     manager.MoveTo(main);
+    manager.MoveTo(alarmList);
 
     for (;;) {
         display.Clear();

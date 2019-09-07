@@ -23,6 +23,7 @@ void MainMenu::OnButton(uint8_t button){
         Manager.MoveTo(*setTime);
         break;
     case 1:
+        Manager.MoveTo(*alarmList);
         break;
     case 2:
         Manager.MoveTo(*home);

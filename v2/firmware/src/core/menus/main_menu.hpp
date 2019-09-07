@@ -8,6 +8,7 @@ private:
 public:
     Menu* home;
     Menu* setTime;
+    Menu* alarmList;
 
     MainMenu(MenuManager& manager): Menu(manager) {};
 
