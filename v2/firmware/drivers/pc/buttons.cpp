@@ -31,3 +31,7 @@ bool Button::Pressed(uint8_t index) {
 
     return false;
 }
+
+bool Button::Any() {
+    return Pressed(0) || Pressed(1) || Pressed(2) || Pressed(3);
+}

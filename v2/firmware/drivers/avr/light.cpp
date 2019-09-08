@@ -1,3 +1,4 @@
+#include <drivers/buttons.hpp>
 #include "drivers/light.hpp"
 #include "io.hpp"
 
@@ -14,26 +15,22 @@ void Light::SetLight(bool turnedOn) {
         PORTB &= ~LIGHT;
 }
 
-// void update_light(Time &time)
-// {
-//     static uint8_t remaining = 0;
-//     static uint8_t seconds = 0;
+void Light::Tick(Time &time, Button& button) {
+    static uint8_t remaining = 0;
+     static uint8_t seconds = 0;
 
-//     if (btn_any_pressed())
-//     {
-//         remaining = 10;
-//     }
+     if (button.Any())
+     {
+         remaining = 10;
+     }
 
-//     if (seconds != time.seconds)
-//     {
-//         seconds = time.seconds;
+     if (seconds != time.seconds)
+     {
+         seconds = time.seconds;
 
-//         if (remaining > 0)
-//             remaining--;
-//     }
+         if (remaining > 0)
+             remaining--;
+     }
 
-//     if (remaining > 0)
-//         set_light(true);
-//     else
-//         set_light(false);
-// }
+    SetLight(remaining > 0);
+}

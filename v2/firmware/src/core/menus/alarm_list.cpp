@@ -123,7 +123,8 @@ void AlarmList::OnButton(uint8_t button) {
                     break;
                 }
                 case AlarmViewState::Edit:
-                    // TODO: Go to edit menu
+                    editMenu.alarmIndex = position - 1;
+                    Manager.MoveTo(editMenu);
                     break;
                 case AlarmViewState::Delete:
                     registry.Remove(--position);

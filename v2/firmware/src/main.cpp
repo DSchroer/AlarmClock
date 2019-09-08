@@ -4,6 +4,7 @@
 #include <drivers/buttons.hpp>
 #include <stdio.h>
 #include <menus/alarm_edit.hpp>
+#include <drivers/light.hpp>
 
 #include "utils/menu_manager.hpp"
 
@@ -21,6 +22,7 @@ int main() {
     Clock clock;
     Display display;
     Button button;
+    Light light;
 
     MenuManager manager {button};
 
@@ -46,14 +48,15 @@ int main() {
 
     manager.MoveTo(main);
 
-    alarmEdit.alarmIndex = 0;
-    manager.MoveTo(alarmEdit);
+//    alarmEdit.alarmIndex = 0;
+//    manager.MoveTo(alarmEdit);
 
     for (;;) {
         display.Clear();
 
         clock.Tick();
         button.Tick();
+        light.Tick(clock.time, button);
 
         if(alarmManager.Test(clock.time)){
             manager.MoveTo(alarmMenu);

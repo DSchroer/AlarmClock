@@ -19,3 +19,7 @@ void Button::Tick() {
 bool Button::Pressed(uint8_t index) {
     return (buttons & (1 << index)) && !(last_buttons & (1 << index)) ? true : false;
 }
+
+bool Button::Any() {
+    return Pressed(0) || Pressed(1) || Pressed(2) || Pressed(3);
+}

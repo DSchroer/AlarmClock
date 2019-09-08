@@ -11,4 +11,5 @@ public:
 
     void Tick();
     bool Pressed(uint8_t index);
+    bool Any();
 };

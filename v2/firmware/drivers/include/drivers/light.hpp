@@ -1,13 +1,12 @@
 #pragma once
 
-// void init_light();
-// void update_light(Time &);
-// void set_light(bool);
+#include <time.hpp>
 
 class Light
 {
 public:
     Light();
 
-    void SetLight(bool turnedOn);
+    void Tick(Time& time, Button& button);
+    static void SetLight(bool turnedOn);
 };
