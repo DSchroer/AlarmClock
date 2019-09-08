@@ -80,7 +80,7 @@ void AlarmList::OnButton(uint8_t button) {
             if (position == 0) {
                 Alarm newAlarm{};
                 registry.Add(newAlarm);
-                editMenu.alarmIndex = registry.Count - 1;
+                editMenu.Load(registry.Count - 1, true);
                 Manager.MoveTo(editMenu);
             } else {
                 menuState = MenuState::Alarm;
@@ -124,7 +124,7 @@ void AlarmList::OnButton(uint8_t button) {
                     break;
                 }
                 case AlarmViewState::Edit:
-                    editMenu.alarmIndex = position - 1;
+                    editMenu.Load(position - 1, false);
                     Manager.MoveTo(editMenu);
                     break;
                 case AlarmViewState::Delete:

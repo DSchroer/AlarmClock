@@ -2,6 +2,9 @@
 
 void AlarmMenu::Render(Display &display) {
 
+    light.SetLight(true);
+    buzzer.SetBuzzer(clock.time.seconds % 2 != 0);
+
     display.X = 5;
     display.Y = 5;
     display.Write("Good Morning!",1);
@@ -16,13 +19,14 @@ void AlarmMenu::Render(Display &display) {
 }
 
 void AlarmMenu::OnButton(uint8_t button) {
-    if(button == 1 || button == 2){
+    if(button == 0 || button == 1){
         alarmManager.Stop();
         Manager.MoveTo(menu);
-    } else if (button == 3 || button == 4){
+    } else if (button == 2 || button == 3){
         alarmManager.Snooze();
         Manager.MoveTo(menu);
     }
+    buzzer.SetBuzzer(false);
 }
 
 

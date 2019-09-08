@@ -1,6 +1,7 @@
 #pragma once
 
 #include <time.hpp>
+#include "buttons.hpp"
 
 class Light
 {
@@ -8,5 +9,5 @@ public:
     Light();
 
     void Tick(Time& time, Button& button);
-    static void SetLight(bool turnedOn);
+    void SetLight(bool turnedOn);
 };

@@ -22,8 +22,10 @@ EditState operator--(EditState&, int);
 
 class AlarmEdit: public Menu {
 private:
-
+    uint8_t alarmIndex;
     Alarm alarm;
+    bool isNew;
+
     AlarmRegistry& registry;
 
     EditState state;
@@ -33,10 +35,11 @@ private:
 public:
     explicit AlarmEdit(MenuManager& manager, AlarmRegistry& registry): Menu{manager}, registry{registry} {};
 
-    uint8_t alarmIndex;
     Menu* menu;
 
     void Render(Display& display) override;
     void OnButton(uint8_t button) override;
     void Reset() override;
+
+    void Load(uint8_t alarmIndex, bool isNew);
 };

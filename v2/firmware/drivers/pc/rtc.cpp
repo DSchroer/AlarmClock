@@ -15,7 +15,7 @@ void Clock::Tick(){
     time.seconds = fullTime->tm_sec;
 
     time.date = fullTime->tm_mday;
-    time.day = fullTime->tm_wday;
+    time.day = fullTime->tm_wday + 1;
 
     time.month = fullTime->tm_mon + 1;
     time.year = 0;

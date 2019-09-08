@@ -144,6 +144,9 @@ void AlarmEdit::OnButton(uint8_t button) {
                 toggleDay(AlarmDay::Sunday);
                 break;
             case EditState::Confirm:
+                if(isNew){
+                    registry.Remove(alarmIndex);
+                }
                 Manager.MoveTo(*menu);
                 break;
         }
@@ -151,7 +154,6 @@ void AlarmEdit::OnButton(uint8_t button) {
 }
 
 void AlarmEdit::Reset() {
-    alarm = registry[alarmIndex];
     state = EditState::Hours;
 }
 
@@ -161,6 +163,12 @@ bool AlarmEdit::isDay(AlarmDay day) {
 
 void AlarmEdit::toggleDay(AlarmDay day) {
     alarm.days = alarm.days ^ day;
+}
+
+void AlarmEdit::Load(uint8_t newAlarmIndex, bool isNewAlarm) {
+    alarmIndex = newAlarmIndex;
+    alarm = registry[alarmIndex];
+    isNew = isNewAlarm;
 }
 
 EditState operator++(EditState &state, int) {

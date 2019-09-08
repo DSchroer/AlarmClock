@@ -1,9 +1,9 @@
 #define F_CPU 800000UL
 
-#include "../drivers/include/display.hpp"
 #include <drivers/buttons.hpp>
 #include <menus/alarm_edit.hpp>
 #include <drivers/light.hpp>
+#include <drivers/storage.hpp>
 
 #include "utils/menu_manager.hpp"
 
@@ -20,6 +20,8 @@ int main() {
     Display display;
     Button button;
     Light light;
+    Buzzer buzzer;
+    Storage storage;
 
     MenuManager manager {button};
 
@@ -29,10 +31,12 @@ int main() {
     Home main {manager, clock, rootMenu};
     SetTime setTime {manager, clock, rootMenu};
 
-    AlarmRegistry registry{};
+    AlarmRegistry registry{storage};
+    registry.Load();
+
     AlarmManager alarmManager{registry};
 
-    AlarmMenu alarmMenu{manager, alarmManager, main};
+    AlarmMenu alarmMenu{manager, alarmManager, main, light, buzzer, clock};
 
     AlarmEdit alarmEdit{manager, registry};
     AlarmList alarmList{manager, registry, rootMenu, alarmEdit, alarmManager};

@@ -15,19 +15,19 @@ public:
 
     void Add(T value){
         Count++;
-        data = (T*)realloc(data, sizeof(T) * Count);
+        Resize();
         data[Count - 1] = value;
     }
 
     void Remove(uint8_t index){
         Count--;
         data[index] = data[Count];
-        data = (T*)realloc(data, sizeof(T) * Count);
+        Resize();
     }
 
     void Clear(){
         Count = 0;
-        data = (T*)realloc(data, 0);
+        Resize();
     }
 
     T& Get(uint8_t index){
@@ -46,6 +46,10 @@ public:
     T& operator[](uint8_t index){ return Get(index); }
 
     uint8_t Count = 0;
-private:
+protected:
     T* data = nullptr;
+
+    void Resize(){
+        data = (T*)realloc(data, sizeof(T) * Count);
+    }
 };
