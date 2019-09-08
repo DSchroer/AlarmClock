@@ -2,4 +2,4 @@ build
 .vscode/ipch
 main
 .idea
-cmake-build-debug
+cmake-build-*
