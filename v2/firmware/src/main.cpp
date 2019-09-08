@@ -2,7 +2,6 @@
 
 #include "../drivers/include/display.hpp"
 #include <drivers/buttons.hpp>
-#include <stdio.h>
 #include <menus/alarm_edit.hpp>
 #include <drivers/light.hpp>
 
@@ -15,8 +14,6 @@
 #include "menus/set_time.hpp"
 
 #include "alarms/alarm_manager.hpp"
-
-#include "utils/vector.hpp"
 
 int main() {
     Clock clock;
@@ -33,23 +30,20 @@ int main() {
     SetTime setTime {manager, clock, rootMenu};
 
     AlarmRegistry registry{};
-    registry.Add(Alarm{17, 19, AlarmDay ::All});
-
     AlarmManager alarmManager{registry};
 
-    AlarmMenu alarmMenu{manager, alarmManager};
+    AlarmMenu alarmMenu{manager, alarmManager, main};
 
     AlarmEdit alarmEdit{manager, registry};
-    AlarmList alarmList{manager, registry, rootMenu, alarmEdit};
+    AlarmList alarmList{manager, registry, rootMenu, alarmEdit, alarmManager};
+
+    alarmEdit.menu = &alarmList;
 
     rootMenu.home = &main;
     rootMenu.setTime = &setTime;
     rootMenu.alarmList = &alarmList;
 
     manager.MoveTo(main);
-
-//    alarmEdit.alarmIndex = 0;
-//    manager.MoveTo(alarmEdit);
 
     for (;;) {
         display.Clear();

@@ -18,8 +18,10 @@ void AlarmMenu::Render(Display &display) {
 void AlarmMenu::OnButton(uint8_t button) {
     if(button == 1 || button == 2){
         alarmManager.Stop();
+        Manager.MoveTo(menu);
     } else if (button == 3 || button == 4){
         alarmManager.Snooze();
+        Manager.MoveTo(menu);
     }
 }
 

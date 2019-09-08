@@ -87,6 +87,7 @@ void AlarmList::OnButton(uint8_t button) {
             }
         } else if (button == 0) {
             registry.Save();
+            alarmManager.Rebuild();
             Manager.MoveTo(mainMenu);
         }
     } else if (menuState == MenuState::Alarm) {

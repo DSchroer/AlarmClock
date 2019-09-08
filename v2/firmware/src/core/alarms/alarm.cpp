@@ -24,5 +24,5 @@ bool Alarm::operator==(const Time &time) {
            time.seconds == 0 &&
            time.hours == hour &&
            time.minutes == minute &&
-           (days & static_cast<AlarmDay>(1 << time.day)) != AlarmDay::None;
+           (days & static_cast<AlarmDay>(((uint8_t)1) << time.day)) != AlarmDay::None;
 }

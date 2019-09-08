@@ -8,28 +8,28 @@ Button::Button() {
 }
 
 void Button::Tick() {
-
 }
 
 bool Button::Pressed(uint8_t index) {
 
-    if(index == 0 && sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad0)){
-        return true;
+    bool pressed = false;
+    if (index == 0 && sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad0)) {
+        pressed = true;
     }
 
-    if(index == 1 && sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad1)){
-        return true;
+    if (index == 1 && sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad1)) {
+        pressed = true;
     }
 
-    if(index == 2 && sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad2)){
-        return true;
+    if (index == 2 && sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad2)) {
+        pressed = true;
     }
 
-    if(index == 3 && sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad3)){
-        return true;
+    if (index == 3 && sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad3)) {
+        pressed = true;
     }
 
-    return false;
+    return pressed;
 }
 
 bool Button::Any() {

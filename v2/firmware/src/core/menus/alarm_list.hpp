@@ -22,11 +22,13 @@ private:
     AlarmViewState alarmViewState = AlarmViewState::Pause;
 
     AlarmRegistry& registry;
+    AlarmManager& alarmManager;
     Menu& mainMenu;
     AlarmEdit& editMenu;
 
 public:
-    explicit AlarmList(MenuManager& manager, AlarmRegistry& registry1, Menu& main, AlarmEdit& edit): Menu{manager}, registry{registry1}, mainMenu{main}, editMenu{edit} {};
+    explicit AlarmList(MenuManager& manager, AlarmRegistry& registry1, Menu& main, AlarmEdit& edit, AlarmManager& alarmManager):
+    Menu{manager}, registry{registry1}, mainMenu{main}, editMenu{edit}, alarmManager{alarmManager} {};
 
     void Render(Display& display) override;
     void OnButton(uint8_t button) override;
