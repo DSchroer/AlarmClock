@@ -2,7 +2,7 @@
 
 #include "../drivers/include/display.hpp"
 #include <drivers/buttons.hpp>
-#include <cstdio>
+#include <stdio.h>
 #include <menus/alarm_edit.hpp>
 
 #include "utils/menu_manager.hpp"
@@ -37,7 +37,7 @@ int main() {
 
     AlarmMenu alarmMenu{manager, alarmManager};
 
-    AlarmEdit alarmEdit{manager};
+    AlarmEdit alarmEdit{manager, registry};
     AlarmList alarmList{manager, registry, rootMenu, alarmEdit};
 
     rootMenu.home = &main;
@@ -46,7 +46,7 @@ int main() {
 
     manager.MoveTo(main);
 
-    alarmEdit.alarm = registry[0];
+    alarmEdit.alarmIndex = 0;
     manager.MoveTo(alarmEdit);
 
     for (;;) {

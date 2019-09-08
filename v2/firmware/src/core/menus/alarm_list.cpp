@@ -1,4 +1,4 @@
-#include <cstdio>
+#include <stdio.h>
 #include "./alarm_list.hpp"
 
 void AlarmList::Render(Display &display) {
@@ -78,10 +78,10 @@ void AlarmList::OnButton(uint8_t button) {
             }
         } else if (button == 3) {
             if (position == 0) {
-                Alarm alarm{};
-                editMenu.alarm = alarm;
-                // TODO: Go to alarm create menu
-                Manager.MoveTo(alarm);Q
+                Alarm newAlarm{};
+                registry.Add(newAlarm);
+                editMenu.alarmIndex = registry.Count - 1;
+                Manager.MoveTo(editMenu);
             } else {
                 menuState = MenuState::Alarm;
             }

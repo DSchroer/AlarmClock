@@ -1,7 +1,7 @@
 #include <drivers/rtc.hpp>
 
 extern "C" {
-#include "../lib/i2c_master.h"
+#include "lib/i2c_master.h"
 }
 
 #define RTC_READ_ADDR 0xD1u

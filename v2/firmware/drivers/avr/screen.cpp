@@ -1,7 +1,7 @@
 #include <drivers/screen.hpp>
 
 extern "C" {
-#include <nokia5110.h>
+#include "lib/nokia5110.h"
 }
 
 Screen::Screen() {

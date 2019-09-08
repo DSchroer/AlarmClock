@@ -1,4 +1,6 @@
-FILE(GLOB all_SRC ./**.cpp ./**.c)
+FILE(GLOB all_SRC ./*/**.cpp ./*/**.c ./**.cpp)
+
+message(STATUS ${all_SRC})
 
 include_directories(../include)
-add_library(drivers_avr ${all_SRC})
+add_avr_library(drivers_avr ${all_SRC})

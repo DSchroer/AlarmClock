@@ -1,1 +1,1 @@
-scons && avrdude -c usbtiny -p m328p -U build/main.hex
+avrdude -c usbtiny -p m328p -U cmake-build-deploy/firmware-atmega328p.hex
