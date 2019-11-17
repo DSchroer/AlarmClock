@@ -9,6 +9,11 @@ public:
         data = (T*)malloc(0);
     }
 
+    template<typename... Args>
+    Vector(Args... list) {
+        (Add(list), ...);
+    }
+
     ~Vector(){
         free(data);
     }
