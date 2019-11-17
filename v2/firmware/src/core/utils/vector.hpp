@@ -11,6 +11,7 @@ public:
 
     template<typename... Args>
     Vector(Args... list) {
+        Vector();
         (Add(list), ...);
     }
 
