@@ -7,10 +7,13 @@
             
             "label": "Build",
             "type": "shell",
-            "command": "scons --local",
+            "command": "make",
             "group": {
                 "isDefault": true,
                 "kind": "build"
+            },
+            "options": {
+                "cwd": "./build"
             },
             "problemMatcher": []
         }

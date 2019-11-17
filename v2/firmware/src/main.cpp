@@ -12,6 +12,7 @@
 #include "menus/alarm_menu.hpp"
 #include "menus/main_menu.hpp"
 #include "menus/set_time.hpp"
+#include "menus/list_menu.hpp"
 
 #include "alarms/alarm_manager.hpp"
 
@@ -49,6 +50,13 @@ int main() {
 
     manager.MoveTo(main);
 
+    ListMenu list{manager, "List", Vector<Option>{
+        Option{Vector<State>{State{}}},
+        Option{Vector<State>{}}
+    }};
+
+    manager.MoveTo(list);
+
     for (;;) {
         display.Clear();
 
@@ -61,7 +69,6 @@ int main() {
         }
 
         manager.Update();
-
         manager.Render(display);
 
         display.Flush();
