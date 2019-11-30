@@ -26,13 +26,13 @@ TEST(AlarmTests, OverflowDay) {
 }
 
 TEST(AlarmTests, AlarmDayTests) {
-    ASSERT_EQ(AlarmDay::Monday, static_cast<AlarmDay>(1 << 0));
-    ASSERT_EQ(AlarmDay::Tuesday, static_cast<AlarmDay>(1 << 1));
-    ASSERT_EQ(AlarmDay::Wednesday, static_cast<AlarmDay>(1 << 2));
-    ASSERT_EQ(AlarmDay::Thursday, static_cast<AlarmDay>(1 << 3));
-    ASSERT_EQ(AlarmDay::Friday, static_cast<AlarmDay>(1 << 4));
-    ASSERT_EQ(AlarmDay::Saturday, static_cast<AlarmDay>(1 << 5));
-    ASSERT_EQ(AlarmDay::Sunday, static_cast<AlarmDay>(1 << 6));
+    ASSERT_EQ(AlarmDay::Monday, static_cast<AlarmDay>(1 << 1));
+    ASSERT_EQ(AlarmDay::Tuesday, static_cast<AlarmDay>(1 << 2));
+    ASSERT_EQ(AlarmDay::Wednesday, static_cast<AlarmDay>(1 << 3));
+    ASSERT_EQ(AlarmDay::Thursday, static_cast<AlarmDay>(1 << 4));
+    ASSERT_EQ(AlarmDay::Friday, static_cast<AlarmDay>(1 << 5));
+    ASSERT_EQ(AlarmDay::Saturday, static_cast<AlarmDay>(1 << 6));
+    ASSERT_EQ(AlarmDay::Sunday, static_cast<AlarmDay>(1 << 0));
 }
 
 TEST(AlarmTests, AlarmEqualTime) {

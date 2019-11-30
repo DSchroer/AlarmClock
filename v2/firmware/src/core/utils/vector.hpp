@@ -1,12 +1,27 @@
 #pragma once
 
 #include <stdlib.h>
+#include <cstring>
 
 template <typename T>
 class Vector {
 public:
     Vector(){
         data = (T*)malloc(0);
+    }
+
+    template<typename... Args>
+    Vector(Args... list) {
+        Vector();
+        (Add(list), ...);
+    }
+
+    Vector(const Vector<T>& other){
+        data = (T*)malloc(sizeof(T) * other.Count);
+        Count = other.Count;
+        for(uint8_t i = 0; i < Count; i++){
+            data[i] = other.data[i];
+        }
     }
 
     ~Vector(){
