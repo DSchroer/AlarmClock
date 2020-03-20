@@ -1,0 +1,13 @@
+[default]
+name=Default
+runtime=host
+toolchain=default
+config-opts=-DLOCAL=ON
+run-opts=
+prefix=/home/dschroer/.cache/gnome-builder/install/firmware/host
+app-id=
+postbuild=
+prebuild=
+default=true
+
+[default.environment]

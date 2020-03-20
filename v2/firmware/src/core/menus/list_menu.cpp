@@ -26,11 +26,11 @@ void ListMenu::RenderLine(uint8_t y, uint8_t renderPos, Display &display) {
         return;
     }
 
-    Option option = options[renderPos];
+    Option& option = options[renderPos];
 
     char buffer[6];
     snprintf(buffer, sizeof(buffer), "#%d ", renderPos);
     display.Write(buffer, 1);
 
-    option.Click();
+    option.Draw(display);
 }

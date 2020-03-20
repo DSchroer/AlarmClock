@@ -14,6 +14,6 @@ void AlarmRegistry::Load() {
         this->Count = 0;
     }
 
-    Resize();
+    Resize(this->Count);
     storage.Load(DATA_ADDR, this->data, this->Count * sizeof(Alarm));
 }

@@ -5,8 +5,8 @@
 class State
 {
 public:
-    virtual void Draw(Display& display) {};
-    virtual void Click() {};
+    virtual void Draw(Display& display) = 0;
+    virtual void Click() = 0;
 };
 
 class TextState: public State
@@ -24,20 +24,20 @@ class Option
 {
 private:
     uint8_t currentState = 0;
-    Vector<State> states;
+    Vector<State*> states;
 public:
-
-    Option(Vector<State> states): states{states} {};
+    explicit Option(Vector<State*> states): states{states} {};
+    explicit Option(): states{} {};
 
     void Reset() { currentState = 0; };
     void Click() { 
         if(states.Count > 0){
-            states[currentState].Click();
+            states[currentState]->Click();
         }
     };
     void Draw(Display& display) {
         if(states.Count > 0){
-            states[currentState].Draw(display);
+            states[currentState]->Draw(display);
         }
     };
 

@@ -27,7 +27,7 @@ add_subdirectory(src/core)
 
 if(LOCAL)
     add_subdirectory(drivers/pc)
-    add_executable(firmware src/main.cpp)
+    add_executable(firmware src/main.cpp src/allocation.cpp)
     target_link_libraries(firmware drivers_pc)
     target_link_libraries(firmware firmware_core)
 else()

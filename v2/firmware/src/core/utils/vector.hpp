@@ -1,13 +1,14 @@
 #pragma once
 
 #include <stdlib.h>
-#include <cstring>
+
+
 
 template <typename T>
 class Vector {
 public:
     Vector(){
-        data = (T*)malloc(0);
+        data = new T[0];
     }
 
     template<typename... Args>
@@ -17,32 +18,42 @@ public:
     }
 
     Vector(const Vector<T>& other){
-        data = (T*)malloc(sizeof(T) * other.Count);
+        data = new T[other.Count];
         Count = other.Count;
-        for(uint8_t i = 0; i < Count; i++){
-            data[i] = other.data[i];
-        }
+        CopyData(other.data, other.Count, data, Count);
+    }
+
+    Vector(Vector<T>&& other){
+        data = new T[other.Count];
+        Count = other.Count;
+        CopyData(other.data, other.Count, data, Count);
+        delete [] other.data;
+    }
+
+    Vector& operator=(const Vector& other){
+        data = new T[other.Count];
+        Count = other.Count;
+        CopyData(other.data, other.Count, data, Count);
+        return *this;
     }
 
     ~Vector(){
-        free(data);
+        delete [] data;
     }
 
     void Add(T value){
-        Count++;
-        Resize();
+        Resize(Count + 1);
         data[Count - 1] = value;
     }
 
     void Remove(uint8_t index){
-        Count--;
-        data[index] = data[Count];
-        Resize();
+        data[index] = data[Count - 1];
+        Resize(Count - 1);
     }
 
     void Clear(){
         Count = 0;
-        Resize();
+        Resize(Count);
     }
 
     T& Get(uint8_t index){
@@ -64,7 +75,19 @@ public:
 protected:
     T* data = nullptr;
 
-    void Resize(){
-        data = (T*)realloc(data, sizeof(T) * Count);
+    void Resize(uint8_t newSize){
+        auto newData = new T[newSize];
+        CopyData(data, Count, newData, newSize);
+        delete [] data;
+
+        data = newData;
+        Count = newSize;
+    }
+
+    static void CopyData(T* source, uint8_t sLen, T* dest, uint8_t dLen){
+        uint8_t minSize = sLen <= dLen ? sLen : dLen;
+        for(uint8_t i =0; i < minSize; i++){
+            dest[i] = source[i];
+        }
     }
 };

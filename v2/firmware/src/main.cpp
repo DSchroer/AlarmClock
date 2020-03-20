@@ -16,6 +16,8 @@
 
 #include "alarms/alarm_manager.hpp"
 
+#include "./allocation.cpp"
+
 int main() {
     Clock clock;
     Display display;
@@ -51,8 +53,9 @@ int main() {
     manager.MoveTo(main);
 
     ListMenu list{manager, "List", Vector<Option>{
-        Option{Vector<State>{State{}}},
-        Option{Vector<State>{}}
+            Option{Vector<State*>{new TextState{"foo"}}},
+            Option{Vector<State*>{new TextState{"bar"}}},
+            Option{Vector<State*>{new TextState{"bat"}}}
     }};
 
     manager.MoveTo(list);

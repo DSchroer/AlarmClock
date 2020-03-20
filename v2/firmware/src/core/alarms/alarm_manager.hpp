@@ -11,6 +11,7 @@ struct AlarmEntry {
     bool isSnoozed = false;
 
     explicit AlarmEntry(Alarm value, bool snooze = false): alarm{value}, isSnoozed{snooze} { }
+    explicit AlarmEntry(): alarm{}, isSnoozed{false} { }
 };
 
 class AlarmManager{
