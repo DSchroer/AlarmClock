@@ -13,6 +13,7 @@ public:
     MenuManager(Button& buttons): buttons{buttons} {};
 
     void MoveTo(Menu& menu);
+    void MoveTo(Menu* menu);
     void Update();
     void Render(Display& display);
 };

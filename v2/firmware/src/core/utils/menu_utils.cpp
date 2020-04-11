@@ -56,3 +56,16 @@ void DrawTime(Display& display, const Time& time) {
     display.SetCursor(1,40);
     display.WriteL(&dateBuffer[3], 4, 1);
 }
+
+void DrawConfirm(Display &display) {
+    display.Clear();
+
+    display.SetCursor(5,5);
+    display.Write("Confirm?");
+
+    display.SetCursor(9, 20);
+    display.Write("^ Yes");
+
+    display.SetCursor(9, 30);
+    display.Write("~ No");
+}

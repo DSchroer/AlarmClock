@@ -1,6 +1,15 @@
 #include "menu_manager.hpp"
 #include "display.hpp"
 
+void MenuManager::MoveTo(Menu* menu){
+    if(menu == nullptr){
+        return;
+    }
+
+    menu->Reset();
+    current = menu;
+}
+
 void MenuManager::MoveTo(Menu& menu){
     menu.Reset();
     current = &menu;

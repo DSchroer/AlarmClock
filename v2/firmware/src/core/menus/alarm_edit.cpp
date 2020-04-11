@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <utils/menu_utils.hpp>
 #include "alarm_edit.hpp"
 
 void AlarmEdit::Render(Display &display) {
@@ -54,6 +55,7 @@ void AlarmEdit::Render(Display &display) {
             display.Line(75, 38, 5);
             break;
         case EditState::Confirm:
+            DrawConfirm(display);
             break;
     }
 }

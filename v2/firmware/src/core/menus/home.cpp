@@ -36,5 +36,7 @@ void Home::Render(Display &display) {
 }
 
 void Home::OnButton(uint8_t button) {
-    Manager.MoveTo(_main_menu);
+    if(button != 0){
+        Manager.MoveTo(_main_menu);
+    }
 }

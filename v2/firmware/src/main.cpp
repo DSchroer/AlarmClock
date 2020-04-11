@@ -27,12 +27,13 @@ int main() {
     Storage storage;
 
     MenuManager manager {button};
-
-    //Menus
-    MainMenu rootMenu {manager};
+    ListMenu rootMenu {manager, "Menu", Vector<Option>{}};
 
     Home main {manager, clock, rootMenu};
+    rootMenu.SetParent(main);
+
     SetTime setTime {manager, clock, rootMenu};
+    rootMenu.AddOption(Option{Vector<State*>{new NavState{"Clock", manager, setTime}}});
 
     AlarmRegistry registry{storage};
     registry.Load();
@@ -43,22 +44,10 @@ int main() {
 
     AlarmEdit alarmEdit{manager, registry};
     AlarmList alarmList{manager, registry, rootMenu, alarmEdit, alarmManager};
+    rootMenu.AddOption(Option{Vector<State*>{new NavState{"Alarms", manager, alarmList}}});
 
     alarmEdit.menu = &alarmList;
-
-    rootMenu.home = &main;
-    rootMenu.setTime = &setTime;
-    rootMenu.alarmList = &alarmList;
-
     manager.MoveTo(main);
-
-    ListMenu list{manager, "List", Vector<Option>{
-            Option{Vector<State*>{new TextState{"foo"}}},
-            Option{Vector<State*>{new TextState{"bar"}}},
-            Option{Vector<State*>{new TextState{"bat"}}}
-    }};
-
-    manager.MoveTo(list);
 
     for (;;) {
         display.Clear();

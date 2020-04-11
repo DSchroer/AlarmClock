@@ -20,6 +20,19 @@ public:
     void Click() override {};
 };
 
+class NavState: public State
+{
+private:
+    const char* text;
+    MenuManager& manager;
+    Menu& menu;
+public:
+    NavState(const char* text, MenuManager& manager, Menu& menu): text{text}, manager{manager}, menu{menu} {};
+
+    void Draw(Display& display) override { display.Write(text); };
+    void Click() override { manager.MoveTo(menu); };
+};
+
 class Option
 {
 private:
@@ -40,15 +53,6 @@ public:
             states[currentState]->Draw(display);
         }
     };
-
-    void Next() { currentState = (currentState + 1) % states.Count; };
-    void Back() { 
-        if(currentState == 0){
-            currentState = states.Count - 1;
-        }else{
-            currentState = currentState - 1;
-        } 
-    };
 };
 
 class ListMenu: public Menu
@@ -57,12 +61,16 @@ private:
     const char* title;
     Vector<Option> options;
     uint8_t position = 0;
+    Menu* parent = nullptr;
 public:
     ListMenu(MenuManager& manager, const char* title, Vector<Option> options): Menu{manager}, title{title}, options{options} {};
 
     void Render(Display& display) override;
     void OnButton(uint8_t button) override;
     void Reset() override;
+
+    void AddOption(Option option);
+    void SetParent(Menu& parent);
 
     void RenderLine(uint8_t y, uint8_t renderPos, Display &display);
 };

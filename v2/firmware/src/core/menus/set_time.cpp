@@ -85,7 +85,7 @@ void SetTime::Render(Display& display){
         Blink(display, 0, 47, 25);
         break;
     case TimeState::REVIEW:
-        Blink(display, 0, 10, 20);
+        DrawConfirm(display);
         break;
 
     default:
