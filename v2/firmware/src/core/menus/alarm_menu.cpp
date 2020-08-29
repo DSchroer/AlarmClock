@@ -1,3 +1,4 @@
+#include <utils/menu_utils.hpp>
 #include "alarm_menu.hpp"
 
 void AlarmMenu::Render(Display &display) {
@@ -15,13 +16,12 @@ void AlarmMenu::Render(Display &display) {
         buzzer.SetBuzzer(false);
     }
 
-    display.SetCursor(5,5);
-    display.Write("Good Morning!");
+    DrawTime(display, clock.time);
 
-    display.SetCursor(9, 20);
+    display.SetCursor(15, 25);
     display.Write("^ Stop");
 
-    display.SetCursor(9, 30);
+    display.SetCursor(15, 35);
     display.Write("~ Snooze");
 }
 

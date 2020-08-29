@@ -29,7 +29,7 @@ void Spiner(Display &display) {
 void Home::Render(Display &display) {
     const auto time = _clock.time;
 
-    DrawTime(display, time);
+    DrawDateTime(display, time);
 
     display.SetCursor(78, 40);
     Spiner(display);

@@ -21,6 +21,13 @@ void AlarmManager::Snooze() {
         return;
     }
 
+    if(activeAlarm->isSnoozed){
+        auto index = alarms.IndexOf(activeAlarm);
+        if(index != -1){
+            alarms.Remove(index);
+        }
+    }
+
     alarms.Add(AlarmEntry(activeAlarm->alarm + 10, true));
     activeAlarm = nullptr;
 }

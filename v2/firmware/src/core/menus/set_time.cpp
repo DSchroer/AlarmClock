@@ -59,7 +59,7 @@ void Blink(Display& display, uint8_t x, uint8_t y, uint8_t length){
 
 void SetTime::Render(Display& display){
 
-    DrawTime(display, editTime);
+    DrawDateTime(display, editTime);
     
     switch (EditorState)
     {
