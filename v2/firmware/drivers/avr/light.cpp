@@ -14,23 +14,3 @@ void Light::SetLight(bool turnedOn) {
     else
         PORTB &= ~LIGHT;
 }
-
-void Light::Tick(Time &time, Button& button) {
-    static uint8_t remaining = 0;
-     static uint8_t seconds = 0;
-
-     if (button.Any())
-     {
-         remaining = 10;
-     }
-
-     if (seconds != time.seconds)
-     {
-         seconds = time.seconds;
-
-         if (remaining > 0)
-             remaining--;
-     }
-
-    SetLight(remaining > 0);
-}

@@ -1,4 +1,3 @@
-#include <drivers/buttons.hpp>
 #include "drivers/light.hpp"
 
 Light::Light() {
@@ -6,9 +5,5 @@ Light::Light() {
 }
 
 void Light::SetLight(bool turnedOn) {
-    // Do Nothing
-}
-
-void Light::Tick(Time &time, Button& button) {
     // Do Nothing
 }

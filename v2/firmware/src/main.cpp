@@ -29,7 +29,7 @@ int main() {
     MenuManager manager {button};
     ListMenu rootMenu {manager, "Menu", Vector<Option>{}};
 
-    Home main {manager, clock, rootMenu};
+    Home main {manager, clock, rootMenu, light};
     rootMenu.SetParent(main);
 
     SetTime setTime {manager, clock, rootMenu};

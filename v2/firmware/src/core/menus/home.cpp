@@ -27,7 +27,7 @@ void Spiner(Display &display) {
 }
 
 void Home::Render(Display &display) {
-    const auto time = _clock.time;
+    const auto time = clock.time;
 
     DrawDateTime(display, time);
 
@@ -36,7 +36,7 @@ void Home::Render(Display &display) {
 }
 
 void Home::OnButton(uint8_t button) {
-    if(button != 0){
-        Manager.MoveTo(_main_menu);
+    if(button != 0 && light.ActiveFor() > 1){
+        Manager.MoveTo(mainMenu);
     }
 }

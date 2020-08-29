@@ -13,19 +13,19 @@ void Button::Tick() {
 bool Button::Pressed(uint8_t index) {
 
     bool pressed = false;
-    if (index == 0 && sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad0)) {
+    if (index == 0 && sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
         pressed = true;
     }
 
-    if (index == 1 && sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad1)) {
+    if (index == 1 && sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) {
         pressed = true;
     }
 
-    if (index == 2 && sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad2)) {
+    if (index == 2 && sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) {
         pressed = true;
     }
 
-    if (index == 3 && sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad3)) {
+    if (index == 3 && sf::Keyboard::isKeyPressed(sf::Keyboard::Num4)) {
         pressed = true;
     }
 
