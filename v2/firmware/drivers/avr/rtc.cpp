@@ -10,26 +10,6 @@ extern "C" {
 #define bin_bcd(num) (((num) / 10) * 16) + ((num) % 10)
 #define bdc_bin(num) (((num) / 16) * 10) + ((num) % 16)
 
-// const char *rtc_ordinal(uint8_t date) {
-//     switch (date % 100) {
-//         case 11:
-//         case 12:
-//         case 13:
-//             return "th";
-//         default:
-//             switch (date % 10) {
-//                 case 1:
-//                     return "st";
-//                 case 2:
-//                     return "nd";
-//                 case 3:
-//                     return "rd";
-//                 default:
-//                     return "th";
-//             }
-//     }
-// }
-
 void rtc_reset_position() {
     i2c_init();
     i2c_start(RTC_WRITE_ADDR);
@@ -44,6 +24,11 @@ void rtc_get_time(Time &time) {
     for (unsigned int i = 0; i < sizeof(Time); i++) {
         ((uint8_t *)&time)[i] = bdc_bin(((uint8_t *)&time)[i]);
     }
+
+    time.day &= 0b00000111;
+    time.date &= 0b00111111;
+    time.month &= 0b00011111;
+    time.year &= 0b11111111;
 }
 
 void rtc_set_time(Time &time) {
@@ -53,8 +38,6 @@ void rtc_set_time(Time &time) {
 
     // Turn off the CH bit
     time.seconds = ~(0 << 7) & time.seconds;
-    // Enable debug square wave
-    time.control = 0b00010000;
 
     i2c_writeReg(RTC_WRITE_ADDR, 0, (uint8_t *)&time, sizeof(Time));
 }
